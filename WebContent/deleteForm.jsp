@@ -11,9 +11,6 @@
 	System.out.println("======deleteForm.jsp======");
 	System.out.println(no); 
 	
-	//String pass = (String)request.getAttribute("pass");
-	
-	//형변환 필요
 	
 
 %>

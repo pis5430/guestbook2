@@ -12,6 +12,9 @@ public class GuestVo {
 		//생성자
 		public GuestVo() {}
 		
+		public GuestVo(String password) {
+			this.password = password;
+		}
 		
 		
 		public GuestVo(int no,String password) {

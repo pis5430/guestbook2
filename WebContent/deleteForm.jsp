@@ -5,12 +5,16 @@
 
 <%
 
-	GuestVo no = (GuestVo)request.getAttribute("no");
+	int no = (int)request.getAttribute("guest_no"); //request.setAttribute("guest_no", no); 전달받은 별명으로 넣기
+	//vo.get 방식으로 불러와서 input에 넣으니 오류남 --> 다른방법으로
+	
 	System.out.println("======deleteForm.jsp======");
 	System.out.println(no); 
 	
-	//int no = (int)request.getAttribute("no"); 
+	//String pass = (String)request.getAttribute("pass");
+	
 	//형변환 필요
+	
 
 %>
 
@@ -22,17 +26,18 @@
 </head>
 <body>
 
-	<form action="guestbook2/gbc" method="get">
+	<form action="/guestbook2/gbc" method="get">
 		
 		비밀번호 : <input type="text" name="password">
 		<button type="submit">확인</button>
 		<br>
 		<a href="/gbc">메인으로 돌아가기</a>
 		<%-- hidden--%>
-		<input type="hidden" name="no" value=<%=no%>>
-		<input type="hidden" name="action" value="deform">
+		<input type="text" name="no" value=<%=no%>>
+		<input type="text" name="action" value="delete">
 	
 	</form>
+	
 
 
 </body>

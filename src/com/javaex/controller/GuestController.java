@@ -20,14 +20,14 @@ public class GuestController extends HttpServlet {
     public GuestController() { } //기본생성자
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	    //response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		//컨트롤러 테스트
 		System.out.println("컨트롤러 테스트");
 		
 		//파라미터 action값을 임의로 만듬 (action값 이 어떤건지에 따라서  다른 화면이 나오도록)
-	   String action = request.getParameter("action");
-	   System.out.println(action); // 초기값은 null로 나옴 
+	    String action = request.getParameter("action");
+	    System.out.println(action); // 초기값은 null로 나옴 
 	   
 	   
 	   if("list".equals(action) ) { //addList 출력관련 , action값으로 list가 들어가면 출력 
@@ -61,8 +61,30 @@ public class GuestController extends HttpServlet {
 		   
 	   }else if("delete".equals(action)) { //삭제기능
 		   
-		   //파라미터 2개값 불러오기 (no, password)
-		   
+		    //패스워드 값을 받아와야함 (password)
+			String password = request.getParameter("password");
+			int no = Integer.parseInt(request.getParameter("no"));
+					
+			GuestVo guestVo = new GuestVo(no ,password); //vo안에 넣어줌
+			
+		    //delete불러오기위한 dao선언
+			GuestDao guestDao = new GuestDao();
+			int count = guestDao.guestDelete(guestVo); //count 0일때 비밀번호 틀림, 1일때 삭제성공
+			System.out.println("count:"+count); //count값 확인
+			
+			if(count == 0) { //삭제실패
+				 System.out.println("비밀번호가 틀립니다.");
+				 response.sendRedirect("/guestbook2/passFalse.jsp");
+				 
+			}else {//삭제성공
+				 response.sendRedirect("/guestbook2/gbc?action=list");
+			}
+			
+			
+			
+
+			
+			
 	   }
 	   
 	   

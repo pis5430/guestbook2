@@ -61,7 +61,7 @@
 				<td><a href="/guestbook2/gbc?action=deform&no=<%= guestList.get(i).getNo()%>">[삭제]</a></td>
 				<%--a태그에는 원래 value속성이 없다. 넣어서 시도해봣는데 안됨 --%>
 				<%--href="경로?action=deform&no=삭제할 정보의 번호 불러오기" --%>
-				<%--actin값으로 deform이 들어간 것은 확인이 되나 오류가남 --%>
+				<%--actin값으로 deform이 들어간 것은 확인이 되나 오류가남 = form에서 no값을 불러오는과정에서 실수 --%>
 			</tr>
 			<tr>
 				<td colspan="4">

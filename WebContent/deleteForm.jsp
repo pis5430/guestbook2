@@ -6,7 +6,7 @@
 <%
 
 	int no = (int)request.getAttribute("guest_no"); //request.setAttribute("guest_no", no); 전달받은 별명으로 넣기
-	//vo.get 방식으로 불러와서 input에 넣으니 오류남 --> 다른방법으로
+	//vo.get 방식으로 불러와서 input에 넣으니 오류남 --> 다른방법으로 시도
 	
 	System.out.println("======deleteForm.jsp======");
 	System.out.println(no); 

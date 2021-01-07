@@ -24,7 +24,7 @@
 <body>
 
 
-<form action="/guestbook2/gbc" method="get"> <%--컨트롤러로 --%>
+<form action="/guestbook2/gbc?action=list" method="get"> <%--컨트롤러로 --%>
 
 	<h2>addList 메인화면(등록 및 리스트 출력 가능)</h2>
 	

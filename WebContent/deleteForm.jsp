@@ -12,6 +12,7 @@
 	System.out.println(no); 
 	
 	
+	
 
 %>
 
@@ -30,8 +31,8 @@
 		<br>
 		<a href="/gbc">메인으로 돌아가기</a>
 		<%-- hidden--%>
-		<input type="text" name="no" value=<%=no%>>
-		<input type="text" name="action" value="delete">
+		<input type="hidden" name="no" value=<%=no%>>
+		<input type="hidden" name="action" value="delete">
 	
 	</form>
 	

@@ -81,19 +81,33 @@ public class GuestController extends HttpServlet {
 			}
 			
 
-	   }else if("insert".equals(action)) {
+	   }else if("insert".equals(action)) { //등록
+		   System.out.println("정보 저장.");
+		   
+			//파라미터 3개값 꺼내기 
+			String name = request.getParameter("name");
+			String password = request.getParameter("password");
+			String content = request.getParameter("content");
+			
+			//guestVo 묶고			
+			GuestVo guestVo = new GuestVo(name,password,content);
+			
+			
+			//new dao 만들고			
+			GuestDao guestDao = new GuestDao();
+			
+			//dao guestInsert() 에 저장 			
+			guestDao.guestInsert(guestVo);
+			
+			//다시 list.jsp 화면이 보이게 만들어줘야함 , 리다이렉트코드
+			response.sendRedirect("/guestbook2/gbc?action=list");
+		   
 		   
 		   
 		   
 	   }
 	   
-	   
-	   
-	   
-	   
-	   
-	   
-		
+
 	}
 
 

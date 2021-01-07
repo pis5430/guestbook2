@@ -41,7 +41,7 @@ public class GuestController extends HttpServlet {
 		   request.setAttribute("gList", guestList);
 		   
 		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
-		   RequestDispatcher rd = request.getRequestDispatcher("/addList.jsp");
+		   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/addList.jsp");
 		   rd.forward(request, response);
 		   
 	   }else if("deform".equals(action)) { //삭제폼 관련 (원래 delete에 들어가던 if문 추가) --> 포기 삭제폼이랑 삭제 기능 분리
@@ -55,7 +55,7 @@ public class GuestController extends HttpServlet {
 		   request.setAttribute("guest_no", no);
 		   
 		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
-		   RequestDispatcher rd = request.getRequestDispatcher("/deleteForm.jsp");
+		   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/deleteForm.jsp");
 		   rd.forward(request, response);
 		   
 		   
@@ -74,7 +74,7 @@ public class GuestController extends HttpServlet {
 			
 			if(count == 0) { //삭제실패
 				 System.out.println("비밀번호가 틀립니다.");
-				 response.sendRedirect("/guestbook2/passFalse.jsp");
+				 response.sendRedirect("/WEB-INF/deleteForm.jsp");
 				 
 			}else {//삭제성공
 				 response.sendRedirect("/guestbook2/gbc?action=list");

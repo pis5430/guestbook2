@@ -80,11 +80,9 @@ public class GuestController extends HttpServlet {
 				 response.sendRedirect("/guestbook2/gbc?action=list");
 			}
 			
-			
-			
 
-			
-			
+	   }else if("insert".equals(action)) {
+		   
 	   }
 	   
 	   

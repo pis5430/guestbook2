@@ -37,13 +37,31 @@ public class GuestController extends HttpServlet {
 		   List<GuestVo> guestList = guestDao.getGuestList();
 		   
 		   
-		   //데이터 전달 (리퀘스트)
+		   //데이터 전달 (리퀘스트 어트리뷰트)
 		   request.setAttribute("gList", guestList);
 		   
 		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
 		   RequestDispatcher rd = request.getRequestDispatcher("/addList.jsp");
 		   rd.forward(request, response);
 		   
+	   }else if("deform".equals(action)) { //삭제폼 관련 (원래 delete에 들어가던 if문 추가) --> 포기 삭제폼이랑 삭제 기능 분리
+		   
+		   System.out.println("삭제폼");
+		   
+		   //no값을 받아와야함 
+		   int no = Integer.parseInt(request.getParameter("no"));
+		   
+		   //no 데이터값을 전달 --> deleteForm에서 request.getAttribute("guest_no");
+		   request.setAttribute("guest_no", no);
+		   
+		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
+		   RequestDispatcher rd = request.getRequestDispatcher("/deleteForm.jsp");
+		   rd.forward(request, response);
+		   
+		   
+	   }else if("delete".equals(action)) { //삭제기능
+		   
+		   //파라미터 2개값 불러오기 (no, password)
 		   
 	   }
 	   

@@ -1,12 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
+<%@ page import="java.util.List" %>
+<%@ page import="com.javaex.vo.GuestVo" %>
+
+<!-- 컨트롤러로 포워드  -->
+<%
+	List<GuestVo> guestList = (List<GuestVo>)request.getAttribute("gList"); // (List<GuestVo>) 으로 형변환
+	System.out.println("======addList.jsp======");
+	System.out.println( "guestList :" + guestList.toString()); 
+	//toSting()값이 안나옴...sql 커밋을 안해줘서 데이터가 없었음 -->해결
+
+%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>guestbook 모델2</title>
 </head>
 <body>
+
+
+<form action="/guestbook2/gbc" method="get"> <%--컨트롤러로 --%>
+
+	<h2>addList 메인화면(등록 및 리스트 출력 가능)</h2>
+	
+	<table border="1">
+		<tr>
+			<td>이름</td>
+			<td><input type="text" width="60" name="name"></td>
+			<td>비밀번호</td>
+			<td><input type="text" name="password"></td>
+		</tr>
+		<tr>
+			<td colspan="4" ><textarea rows="5" cols="70" name="content"></textarea></td>
+		</tr>	
+		<tr>
+			<td colspan="4"> <button type="submit">확인</button> </td>
+		</tr>	
+	</table>
+	
+	<%--action : --%> <input type="hidden" name="action" value="insert"> <%--action에 insert 넣기 --%>
+		
+	
+</form>
+
+<br><br>
+
+
+ 	<%for ( int i = 0; i<guestList.size(); i++) { %>
+	
+		<table border = "1">
+			<tr>
+				<td><%= guestList.get(i).getNo() %></td>
+				<td><%= guestList.get(i).getName() %></td>
+				<td><%= guestList.get(i).getDate() %></td>
+				<td><a href="./deleteForm.jsp?no=<%= guestList.get(i).getNo()%>">[삭제]</a></td>
+			</tr>
+			<tr>
+				<td colspan="4">
+				<%= guestList.get(i).getContent() %>
+				</td>
+			</tr>	
+		</table>
+		<br>
+	<%} %>
+
+
+
+
 
 </body>
 </html>

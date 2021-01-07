@@ -55,7 +55,7 @@ public class GuestController extends HttpServlet {
 		   request.setAttribute("guest_no", no);
 		   
 		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
-		   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/deleteForm.jsp");
+		   RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/deleteForm.jsp");
 		   rd.forward(request, response);
 		   
 		   
@@ -74,7 +74,10 @@ public class GuestController extends HttpServlet {
 			
 			if(count == 0) { //삭제실패
 				 System.out.println("비밀번호가 틀립니다.");
-				 response.sendRedirect("/WEB-INF/deleteForm.jsp");
+				 
+				 //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
+				 RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/passFalse.jsp");
+				 rd.forward(request, response);
 				 
 			}else {//삭제성공
 				 response.sendRedirect("/guestbook2/gbc?action=list");

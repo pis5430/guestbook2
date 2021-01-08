@@ -48,7 +48,7 @@ public class GuestController extends HttpServlet {
 		   
 		   System.out.println("삭제폼");
 		   
-		   //no값을 받아와야함 
+		   //no값을 받아와야함 --> get파라미터로 delete폼에서 바로 거내쓰면 어트리뷰트까지 필요없음 (포워드만 해도됨)
 		   int no = Integer.parseInt(request.getParameter("no"));
 		   
 		   //no 데이터값을 전달 --> deleteForm에서 request.getAttribute("guest_no");
@@ -115,7 +115,7 @@ public class GuestController extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//doGet(request, response);
+		doGet(request, response);
 	}
 
 }

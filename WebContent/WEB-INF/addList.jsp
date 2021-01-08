@@ -41,11 +41,11 @@
 				<td colspan="4" ><textarea rows="5" cols="70" name="content"></textarea></td>
 			</tr>	
 			<tr>
-				<td colspan="4"> <button type="submit"  name="action" value="insert">확인</button> </td>
+				<td colspan="4"> <button type="submit">확인</button> </td>
 			</tr>	
 		</table>
 		
-		<%--action : <input type="hidden" name="action" value="insert"> action에 insert 넣기 --%>
+		<%--action : --%> <input type="hidden" name="action" value="insert"><%-- action에 insert 넣기 --%>
 			
 		
 	</form>

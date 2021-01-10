@@ -6,6 +6,7 @@
 
 <!-- 컨트롤러로 포워드  -->
 <%
+
 	List<GuestVo> guestList = (List<GuestVo>)request.getAttribute("gList"); // (List<GuestVo>) 으로 형변환
 	System.out.println("======addList.jsp======");
 	System.out.println( "guestList :" + guestList.toString()); 
@@ -26,7 +27,7 @@
 
 
 	
-	<form action="/guestbook2/gbc" method="get"> <%--컨트롤러로 --%>
+	<form action="/guestbook2/gbc" method="post"> <%--컨트롤러로 --%>
 		
 		<h2>addList 메인화면(등록 및 리스트 출력 가능)</h2>	<%--form 밖으로 나가면 글씨가 안보임..왜??? --%>
 		

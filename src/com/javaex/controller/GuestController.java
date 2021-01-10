@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestVo;
 
 
@@ -22,41 +23,24 @@ public class GuestController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    //response.getWriter().append("Served at: ").append(request.getContextPath());
 		
+		// method="post" 일때 한글깨짐 현상을 해결하는 법 , getParameter 전에 실행시켜야한다.
+		request.setCharacterEncoding("UTF-8"); 
+		
 		//컨트롤러 테스트
 		System.out.println("컨트롤러 테스트");
 		
 		//파라미터 action값을 임의로 만듬 (action값 이 어떤건지에 따라서  다른 화면이 나오도록)
 	    String action = request.getParameter("action");
 	    System.out.println(action); // 초기값은 null로 나옴 
+	    
 	   
 	   
-	   if("list".equals(action) ) { //addList 출력관련 , action값으로 list가 들어가면 출력 
-		   
-		   //리스트 출력처리
-		   GuestDao guestDao = new GuestDao();
-		   List<GuestVo> guestList = guestDao.getGuestList();
-		   
-		   
-		   //데이터 전달 (리퀘스트 어트리뷰트)
-		   request.setAttribute("gList", guestList);
-		   
-		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
-		   RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/addList.jsp");
-		   rd.forward(request, response);
-		   
-	   }else if("deform".equals(action)) { //삭제폼 관련 (원래 delete에 들어가던 if문 추가) --> 포기 삭제폼이랑 삭제 기능 분리
+	    if("deform".equals(action)) { //삭제폼 관련 (원래 delete에 들어가던 if문 추가) --> 포기 삭제폼이랑 삭제 기능 분리
 		   
 		   System.out.println("삭제폼");
 		   
-		   //no값을 받아와야함 --> get파라미터로 delete폼에서 바로 거내쓰면 어트리뷰트까지 필요없음 (포워드만 해도됨)
-		   int no = Integer.parseInt(request.getParameter("no"));
-		   
-		   //no 데이터값을 전달 --> deleteForm에서 request.getAttribute("guest_no");
-		   request.setAttribute("guest_no", no);
-		   
-		   //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
-		   RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/deleteForm.jsp");
-		   rd.forward(request, response);
+		   //포워드를 유틸에 넣어서 포워드 메소드로 이용하기
+		   WebUtil.forward(request, response, "./WEB-INF/deleteForm.jsp");
 		   
 		   
 	   }else if("delete".equals(action)) { //삭제기능
@@ -74,17 +58,19 @@ public class GuestController extends HttpServlet {
 			
 			if(count == 0) { //삭제실패
 				 System.out.println("비밀번호가 틀립니다.");
+
+				 //포워드를 유틸에 넣어서 포워드 메소드로 이용하기
+				 WebUtil.forward(request, response, "./WEB-INF/passFalse.jsp");
 				 
-				 //jsp에 포워드 (서블릿에서jsp파일에 포워드) , getRequestDispatcher("포워드 경로");
-				 RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/passFalse.jsp");
-				 rd.forward(request, response);
 				 
 			}else {//삭제성공
-				 response.sendRedirect("/guestbook2/gbc?action=list");
+				
+				 WebUtil.rdirecte(request, response, "/guestbook2/gbc?action=list");// WebUtil사용
 			}
 			
 
 	   }else if("insert".equals(action)) { //등록
+		   
 		   System.out.println("정보 저장.");
 		   
 			//파라미터 3개값 꺼내기 
@@ -102,11 +88,19 @@ public class GuestController extends HttpServlet {
 			//dao guestInsert() 에 저장 			
 			guestDao.guestInsert(guestVo);
 			
-			//다시 list.jsp 화면이 보이게 만들어줘야함 , 리다이렉트코드
-			response.sendRedirect("/guestbook2/gbc?action=list");
+			WebUtil.rdirecte(request, response, "/guestbook2/gbc?action=list");// WebUtil사용
+   
+	   }else {
 		   
+		   //리스트 출력처리
+		   GuestDao guestDao = new GuestDao();
+		   List<GuestVo> guestList = guestDao.getGuestList();
+		   		   
+		   //데이터 전달 (리퀘스트 어트리뷰트)
+		   request.setAttribute("gList", guestList);
 		   
-		   
+		   //포워드를 유틸에 넣어서 포워드 메소드로 이용하기
+		   WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 		   
 	   }
 	   
@@ -115,7 +109,7 @@ public class GuestController extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		doGet(request, response); // 이렇게 열어두면 doGet으로 감 
 	}
 
 }

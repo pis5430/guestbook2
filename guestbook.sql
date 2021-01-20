@@ -25,7 +25,8 @@ from guestbook;
 -- seq_guest_no 시퀀스 생성
 create sequence seq_guest_no
 increment by 1
-start with 1;
+start with 1
+nocache;
 
 --시퀀스 생성 확인
 select *

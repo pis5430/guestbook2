@@ -66,7 +66,7 @@ public class GuestController extends HttpServlet {
 			}else {//삭제성공
 				
 				 WebUtil.rdirecte(request, response, "/guestbook2/gbc?action=list");// WebUtil사용
-			}
+			} 
 			
 
 	   }else if("insert".equals(action)) { //등록
